@@ -15,7 +15,7 @@ After download completes, the terminal may prompt for your password." 20 70 100
 
 setup-flasher(){
     patchZlib
-    sudo touch /usr/share/applications/outlineviewer.desktop
+    sudo touch /usr/share/applications/nao-flasher.desktop
 	sudo echo "[Desktop Entry]
 Version=1.0
 Name=NAO Flasher
@@ -26,7 +26,7 @@ Exec='/opt/nao-flasher/flasher'
 Terminal=false
 Type=Application
 Categories=Development
-Keywords=Robot;SoftBank Robotics" > /home/$USER/.local/share/applications/outlineviewer.desktop
+Keywords=Robot;SoftBank Robotics" > /usr/share/applications/nao-flasher.desktop
 }
 
 patchZlib() {

@@ -26,8 +26,8 @@ choose-software(){
 	options=(1 "Choregraphe IDE" off    # any option can be set to default to "on"
 			2 "Python SDK" off
 			3 "C++ SDK" off
-			4 "Robot Settings" off
-			5 "NAO Flasher" off)
+			4 "NAO Flasher" off
+			5 "Robot Settings" off)
 	choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
 	clear
 	for choice in $choices
