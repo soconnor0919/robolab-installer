@@ -43,7 +43,7 @@ choose-software(){
 				;;
 			3)
 				chmod +x dev-setup/install-cppsdk.sh
-				chmod +x dev-setup/cppsdk.sh
+				chmod +x dev-setup/cppsdk.exp
 				bash dev-setup/install-cppsdk.sh
 				;;
 			4)
