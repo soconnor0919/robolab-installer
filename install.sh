@@ -5,7 +5,24 @@ initsetup(){
 
 installprerequisites(){
 	sudo apt install git dialog expect -y -q=3 >/dev/null 2>&1
+	syscheck
 	welcomemsg
+}
+
+syscheck(){
+	arch=$(uname -i)
+	if [[ $arch == i*86 ]]; then
+		dialog --title "WARNING!" --msgbox "This script was built for x86_64 systems. You can still attempt an install, but things may not work." 20 70
+		dpkg --add-architecture amd64
+	elif  [[ $arch == arm* ]]; then
+		dialog --title "WARNING!" --msgbox "This script was built for x86_64 systems. You can still attempt an install, but things may not work." 20 70
+		dpkg --add-architecture amd64
+	fi
+
+	ver="$(lsb_release -sr)"
+	if [[ $ver != '22.10' ]]; then
+		dialog --title "WARNING!" --msgbox "This script was built for systems running Ubuntu 22.10. You can still attempt an install, but things may not work." 20 70
+	fi
 }
 
 welcomemsg(){

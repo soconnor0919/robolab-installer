@@ -21,13 +21,8 @@ setup-qibuild(){
 }
 
 setup-worktree(){
-    worktreedir=$(\
-  		dialog --title "Setup Worktree" \
-         --inputbox "Choose a worktree directory:" 8 40 '~/Documents/my-worktree' \
-  		3>&1 1>&2 2>&3 3>&- \
-		)
-	mkdir -p $worktreedir
-    cd $worktreedir
+	mkdir -p ~/Documents/naoqi-cpp
+    cd ~/Documents/naoqi-cpp
     qibuild init
 }
 
@@ -46,7 +41,7 @@ After download completes, the terminal may prompt for your password." 20 70 100
 }
 
 setup-naoqi() {
-    cd $worktreedir
+    cd ~/Documents/naoqi-cpp
     qitoolchain create mytoolchain /opt/naoqi-cpp-sdk/toolchain.xml
     qibuild add-config myconfig -t mytoolchain --default
 }
