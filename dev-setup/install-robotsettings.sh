@@ -7,15 +7,22 @@ download-robotsettings(){
     dialog --title "Downloading Robot Settings" --gauge "Please wait while Robot Settings downloads from Aldebaran. 
 This will take a while. 
 
-After download completes, the terminal will prompt for your password." 15 75 100
+After download completes, the terminal may prompt for your password." 20 70 100
 }
 
 setup-robotsettings(){
     chmod +x robot-settings.run
-    dialog --title Finished! --title "Installing Robot Settings" --msgbox "The Robot Settings installer will now launch. Please follow the prompts." 22 76
+    sudo rm -rf /opt/robot_settings
+    dialog  --title "Installing Robot Settings" --msgbox "The Robot Settings installer will now launch. Please follow the prompts. After installation completes, please uncheck \"Run Robot Settings now.\"" 20 70
     ./robot-settings.run
-    dialog --title Finished! --title "Installing Robot Settings" --msgbox "Press OK when the installer has finished." 22 76
+    patchZlib
     rm -rf robot-settings.run
+}
+
+patchZlib() {
+    cd /opt/robot_settings/lib/
+    sudo mv libz.so.1 libz.so.1.old
+    sudo ln -s /lib/x86_64-linux-gnu/libz.so.1
 }
 
 download-robotsettings

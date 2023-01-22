@@ -9,37 +9,25 @@ installprerequisites(){
 }
 
 welcomemsg(){
-	dialog --title Welcome! --msgbox "This script can install / edit the following:
-- Set Git username / email
-- Install and set up the NAO6 Development Environment" 20 60
-	selectoptions
+	dialog --title "Welcome to the Robolab Installer!" --msgbox "This script will automatically download, install, and patch the following:
+	
+- Choregraphe Integrated Development Environment
+- NAOqi Python Software Development Kit
+- NAOqi C++ Software Development Kit
+- NAO Flasher
+- NAO Robot Settings
+
+You will now be directed to choose what you would like to install." 20 70
+	choose-software
 }
 
-selectoptions(){
-	cmd=(dialog --separate-output --checklist "Select options:" 22 76 16)
-	options=(1 "Set up Git username and email" off    # any option can be set to default to "on"
-			2 "Set up NAO6 Development Environment" off)
-	choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
-	clear
-	for choice in $choices
-	do
-		case $choice in
-			1)
-				gitconfig
-				;;
-			2)
-				choosedevenv
-				;;
-		esac
-	done
-}
-
-choosedevenv(){
-	cmd=(dialog --separate-output --checklist "Which development environment(s) would you like to install?:" 22 76 16)
-	options=(1 "Choregraphe" off    # any option can be set to default to "on"
+choose-software(){
+	cmd=(dialog --separate-output --checklist "Which software would you like to install?:" 20 70 16)
+	options=(1 "Choregraphe IDE" off    # any option can be set to default to "on"
 			2 "Python SDK" off
 			3 "C++ SDK" off
-			4 "Robot Settings" on)
+			4 "Robot Settings" off
+			5 "NAO Flasher" off)
 	choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
 	clear
 	for choice in $choices
@@ -59,6 +47,10 @@ choosedevenv(){
 				bash dev-setup/install-cppsdk.sh
 				;;
 			4)
+				chmod +x dev-setup/install-flasher.sh
+				bash dev-setup/install-flasher.sh
+				;;
+			5)
 				chmod +x dev-setup/install-robotsettings.sh
 				bash dev-setup/install-robotsettings.sh
 				;;
@@ -66,31 +58,11 @@ choosedevenv(){
 	done
 }
 
-gitconfig() { 
-	sudo rm -rf /home/"$USER"/.git
-	gitusername=$(\
-  		dialog --title "Configure Git" \
-         --inputbox "Enter your full name:" 8 40 \
-  		3>&1 1>&2 2>&3 3>&- \
-		)
-	gitemail=$(\
-  		dialog --title "Configure Git" \
-         --inputbox "Enter your email:" 8 40 \
-  		3>&1 1>&2 2>&3 3>&- \
-		)
-	git config --global user.name "$gitusername"
-	git config --global user.email "$gitemail"
-	git config --global credential.helper store
-}
-
 exitmsg() { \
-	dialog --title Finished! --msgbox "The installer has finished. Press OK to exit." 22 76
+	dialog --title Finished! --msgbox "The installer has finished. Press OK to exit." 20 70
 	clear
 }
 
 # Things that are executed (in order)
 initsetup
 exitmsg
-
-
-

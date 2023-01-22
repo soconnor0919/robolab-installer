@@ -8,7 +8,7 @@ downloadChoregraphe(){
     dialog --title "Downloading Choregraphe" --gauge "Please wait while Choregraphe downloads from Aldebaran. 
 This will take a while. 
 
-After download completes, the terminal will prompt for your password." 15 75 100
+After download completes, the terminal may prompt for your password." 20 70 100
 }
 
 installChoregraphe() {
