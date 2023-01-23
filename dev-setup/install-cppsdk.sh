@@ -10,10 +10,8 @@ getrequiredpackages(){
 }
 
 setup-qibuild(){
-    if grep -Fxq 'PATH=$PATH:$HOME/.local/bin' ~/.bashrc
+    if ! grep -Fxq 'PATH=$PATH:$HOME/.local/bin' ~/.bashrc ;
         then
-            continue
-        else
             echo 'PATH=$PATH:$HOME/.local/bin' >> ~/.bashrc 
             source ~/.bashrc
         fi
@@ -27,7 +25,7 @@ setup-worktree(){
 }
 
 download-naoqi(){
-    URL="https://community-static.aldebaran.com/resources/2.8.5/naoqi-cpp-sdk-2.8.5.10-linux64.tar.gz"
+    URL="https://community-static.aldebaran.com/resources/2.8.5/naoqi-sdk-2.8.5.10-linux64.tar.gz"
     cd /tmp
     wget -O naoqi-cpp-sdk.tar.gz "$URL" 2>&1 | \
     stdbuf -o0 awk '/[.] +[0-9][0-9]?[0-9]?%/ { print substr($0,63,3) }' | \
