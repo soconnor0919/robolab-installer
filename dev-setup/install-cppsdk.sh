@@ -1,7 +1,7 @@
 #!/bin/bash
 installvscode(){
     sudo snap install code --classic 2>&1 | dialog --title "Installing VS Code" --progressbox 20 70
-    code --install-extension ms-vscode.cpptools 2>&1 | dialog --title "Installing VS Code" --progressbox 20 70
+    code --install-extension ms-vscode.cpptools-extension-pack 2>&1 | dialog --title "Installing VS Code" --progressbox 20 70
 }
 
 getrequiredpackages(){
