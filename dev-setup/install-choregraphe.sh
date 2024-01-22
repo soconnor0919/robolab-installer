@@ -1,7 +1,7 @@
 #!/bin/bash
 
 downloadChoregraphe(){
-    URL="https://community-static.aldebaran.com/resources/2.8.6/choregraphe-suite-2.8.6.23-linux64-setup.run"
+    URL="https://community-static.aldebaran.com/resources/2.8.8/choregraphe-2.8.8-ubuntu2204-installer.run"
     cd /tmp
     wget -O choregraphe-suite.run "$URL" 2>&1 | \
     stdbuf -o0 awk '/[.] +[0-9][0-9]?[0-9]?%/ { print substr($0,63,3) }' | \
