@@ -20,7 +20,7 @@ syscheck(){
 	fi
 
 	ver="$(lsb_release -sr)"
-	if [[ $ver != '22.10' ]]; then
+	if [[ $ver != '22.04' ]]; then
 		dialog --title "WARNING!" --msgbox "This script was built for systems running Ubuntu 22.10. You can still attempt an install, but things may not work." 20 70
 	fi
 }
